@@ -52,21 +52,34 @@ const forecast = document.getElementById('forecast');
 
 document.getElementById('submitBtn').addEventListener('click', function() {
     console.log('here');
+    const forecast = getForecastByCity(cityNameInput.value.trim())
     const coords = getLocationByCity(cityNameInput.value.trim());
 
 })
 
-async function getLocationByCity(cityName) {
-    const cityApi = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${weatherAPI}`
+async function getLocationByCity(cityNameInput) {
+    const cityApi = `http://api.openweathermap.org/geo/1.0/direct?q=${cityNameInput}&appid=${weatherAPI}`;
     const response = await fetch(cityApi);
     
 
     const data = response.json();
-    console.log(data);
+    // console.log(data);
     const coords = {
         latitude: [0].lat,
         longitude: [0].lon,
     };
-    console.log(coords);
+
+}
+
+async function getForecastByCity(cityName) {
+    const forecastAPI = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${weatherAPI}`;
+    const fResponse = await fetch(forecastAPI);
+
+    const fData = fResponse.json();
+    console.log(fData);
+
+    // const forecast = {
+    //     temp: fData[0].main.temp,
+    // }
 
 }
