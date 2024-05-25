@@ -97,16 +97,13 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 })
 
 function forecast(city) {
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`;
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApi}`;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`, {
 
-    fetch(weatherUrl)
-        .then(function (response) {
-            return response.json();
-        })
-
-    fetch(forecastUrl)
-        .then(function (response) {
-            return response.json();
-        })
-    }
+}) 
+  .then(function (response) {
+      return response.json();
+  })
+  .then(function (data) {
+      console.log(data);
+  })
+}
