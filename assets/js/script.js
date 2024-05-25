@@ -85,7 +85,7 @@
 
 // }
 
-const weatherApi = 'f04be44694b5a8d0bf6454eaa0e1646b'
+const weatherApi = 'f04be44694b5a8d0bf6454eaa0e1646b' //this is my API key
 
 document.getElementById('submitBtn').addEventListener('click', function(event) {
     event.preventDefault();
@@ -97,8 +97,8 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 })
 
 function forecast(city) {
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}&units=metric`;
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApi}&units=metric`;
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApi}`;
 
     fetch(weatherUrl)
         .then(function (response) {

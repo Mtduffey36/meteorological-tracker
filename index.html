@@ -23,28 +23,26 @@
           <div>
             <h2>Search for a City:</h2>
           </div>
-          <div>
+          <form>
             <input type="text" class="form-control mt-2" id="cityNameInput" placeholder="City" aria-label="">
             <button type="submit" class="btn btn-success mt-2" id="submitBtn">Submit</button>
-          </div>
+          </form>
         </div>
         <div class="col-4">
-          <div>
-            <p class="m-2 fs-5 bg-secondary text-center rounded" class="searchHistory"></p>
+          <div class="m-2 fs-5 bg-secondary text-center rounded" class="searchHistory">
+            <h2>Search History</h2>
+            <ul></ul>
           </div>
         </div>
         <div class="col-6">
           <div>
-            <div>
-              <h3 id="cityName"></h3>
-              <p id="dayTemp"></p>
-              <p id="dayWind"></p>
-              <p id="dayHumidity"></p>
+            <div id="current">
+              <h3>City</h3>
+              <div id="cityInfo"></div>
             </div>
             <div id="forecast">
-              <h4></h4>
-              <p></p>
-            </div>
+              <h4>Forecast</h4>
+              <div id="forecastInfo"></div>
           </div>
         </div>
       </div>
