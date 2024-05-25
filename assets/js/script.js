@@ -85,5 +85,28 @@
 
 // }
 
+const weatherApi = 'f04be44694b5a8d0bf6454eaa0e1646b'
 
+document.getElementById('submitBtn').addEventListener('click', function(event) {
+    event.preventDefault();
 
+    const city = document.getElementById('cityNameInput').value;
+    if (city) {
+        forecast(city);
+    }
+})
+
+function forecast(city) {
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}&units=metric`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApi}&units=metric`;
+
+    fetch(weatherUrl)
+        .then(function (response) {
+            return response.json();
+        })
+
+    fetch(forecastUrl)
+        .then(function (response) {
+            return response.json();
+        })
+    }
