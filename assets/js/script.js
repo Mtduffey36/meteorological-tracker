@@ -96,7 +96,7 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
         forecast(city);
     }
 })
-
+//Calls api information for the current weather
 function current(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`, {
 
@@ -108,9 +108,9 @@ function current(city) {
       console.log(data);
   })
 }
-
+//calls api information for the forecast
 function forecast(city) {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApi}`, {
+    fetch(`http://api.openweathermap.org/data/2.5/forecast/?q=${city}&appid=${weatherApi}`, {
         
 })
     .then(function (response) {
@@ -119,4 +119,12 @@ function forecast(city) {
     .then(function (data) {
         console.log(data);
     })
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j <= 32; j += 8) {
+            console.log([j][i]);
+        }
+    }
 }
+
+
+
