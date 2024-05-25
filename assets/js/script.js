@@ -92,11 +92,12 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 
     const city = document.getElementById('cityNameInput').value;
     if (city) {
+        current(city);
         forecast(city);
     }
 })
 
-function forecast(city) {
+function current(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`, {
 
 }) 
@@ -106,4 +107,16 @@ function forecast(city) {
   .then(function (data) {
       console.log(data);
   })
+}
+
+function forecast(city) {
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApi}`, {
+        
+})
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
 }
