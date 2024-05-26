@@ -104,6 +104,7 @@ function current(city) {
       return response.json();
   })
   .then(function (data) {
+
     currentData = {
         temp: data.main.temp,
         humidity: data.main.humidity,
@@ -123,8 +124,6 @@ function forecast(city) {
     })
     .then(function (data) {
 
-
-        
         for (let i = 0; i <= 32; i += 8) {
             forecastData = {
                 date: data.list[i].dt_txt,
@@ -135,43 +134,7 @@ function forecast(city) {
             console.log(data);
             console.log(forecastData);
         }
-        
     })
-    
 }
-// function forecast(city) {
-//     let promise = [];
-//     for (let i = 0; i <= 32; i += 8) {
-//         promise.push(fetch(`http://api.openweathermap.org/data/2.5/forecast/?q=${city}&appid=${weatherApi}`));
-//     } console.log(city);
-// }
-
-
-// let promises = [];
-// for (let i = 1; i <= 300; i++) {
-//   promises.push(fetch(`example.api/incomes/${i}`));
-// }
-// Promise.all(promises)
-//   .then(function handleData(data) {
-//     return fetch("example.api") // should be returned 1 time
-//       .then(response => {
-//         if (response.ok) return response.json();
-//         throw new Error(response.statusText);
-//       });
-//   })
-//   .catch(function handleError(error) {
-//     console.log("Error" + error);
-//   });
-
-
-// if (request.status >= 200 && request.status < 400) {
-
-//     // DEFINE DAY DATA
-
-//     for (let i = 0; i < 5; i++) {
-//       for (let j = 0; j < 15; j += 3) {
-//         DOMWeatherDay[i].innerHTML = getDayName(obj.list[j].dt);
-//       }
-//     }
 
 
