@@ -40,15 +40,15 @@
 // //     })
 // //   });
 
-// //   function validateCity() {
-// //     const city = document.getElementById('input').value.trim();
+//   function validateCity() {
+//     const city = document.querySelector('input').value.trim();
 
-// //     if (city === "") {
-// //         alert("Please Enter a City!");
-// //         return false;
-// //     };
-// //     return true;
-// //   };
+//     if (city === "") {
+//         alert("Please Enter a City!");
+//         return false;
+//     };
+//     return true;
+//   };
 
 // document.getElementById('submitBtn').addEventListener('click', function(event) {
 //     event.preventDefault();
@@ -99,32 +99,79 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 //Calls api information for the current weather
 function current(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`, {
-
 }) 
   .then(function (response) {
       return response.json();
   })
   .then(function (data) {
-      console.log(data);
-  })
+    currentData = {
+        temp: data.main.temp,
+        humidity: data.main.humidity,
+        wind: data.wind.speed
+    }
+    console.log(currentData);
+  }) 
 }
-//calls api information for the forecast
+// calls api information for the forecast
 function forecast(city) {
     fetch(`http://api.openweathermap.org/data/2.5/forecast/?q=${city}&appid=${weatherApi}`, {
         
 })
     .then(function (response) {
         return response.json();
+        
     })
     .then(function (data) {
-        console.log(data);
-    })
-    for (let i = 0; i < 5; i++) {
-        for (let j = 0; j <= 32; j += 8) {
-            console.log([j][i]);
-        }
-    }
-}
 
+
+        
+        for (let i = 0; i <= 32; i += 8) {
+            forecastData = {
+                date: data.list[i].dt_txt,
+                temp: data.list[i].main.temp,
+                humidity: data.list[i].main.humidity,
+                wind: data.list[i].wind.speed
+            }
+            console.log(data);
+            console.log(forecastData);
+        }
+        
+    })
+    
+}
+// function forecast(city) {
+//     let promise = [];
+//     for (let i = 0; i <= 32; i += 8) {
+//         promise.push(fetch(`http://api.openweathermap.org/data/2.5/forecast/?q=${city}&appid=${weatherApi}`));
+//     } console.log(city);
+// }
+
+
+// let promises = [];
+// for (let i = 1; i <= 300; i++) {
+//   promises.push(fetch(`example.api/incomes/${i}`));
+// }
+// Promise.all(promises)
+//   .then(function handleData(data) {
+//     return fetch("example.api") // should be returned 1 time
+//       .then(response => {
+//         if (response.ok) return response.json();
+//         throw new Error(response.statusText);
+//       });
+//   })
+//   .catch(function handleError(error) {
+//     console.log("Error" + error);
+//   });
+
+
+// if (request.status >= 200 && request.status < 400) {
+
+//     // DEFINE DAY DATA
+
+//     for (let i = 0; i < 5; i++) {
+//       for (let j = 0; j < 15; j += 3) {
+//         DOMWeatherDay[i].innerHTML = getDayName(obj.list[j].dt);
+//       }
+//     }
 
 
