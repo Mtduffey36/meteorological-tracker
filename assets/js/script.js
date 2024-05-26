@@ -106,10 +106,13 @@ function current(city) {
   .then(function (data) {
 
     currentData = {
+        name: data.name,
         temp: data.main.temp,
         humidity: data.main.humidity,
-        wind: data.wind.speed
+        wind: data.wind.speed,
+        icon: data.weather[0].icon
     }
+    // console.log(data);
     console.log(currentData);
   }) 
 }
@@ -129,9 +132,10 @@ function forecast(city) {
                 date: data.list[i].dt_txt,
                 temp: data.list[i].main.temp,
                 humidity: data.list[i].main.humidity,
-                wind: data.list[i].wind.speed
+                wind: data.list[i].wind.speed,
+                icon: data.list[0].weather[0].icon
             }
-            console.log(data);
+            // console.log(data);
             console.log(forecastData);
         }
     })
