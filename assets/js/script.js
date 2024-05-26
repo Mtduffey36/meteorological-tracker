@@ -86,61 +86,65 @@
 // }
 
 const weatherApi = 'f04be44694b5a8d0bf6454eaa0e1646b' //this is my API key
+const cardsContainer = document.getElementById('card');
+const todayContainer = document.getElementById('current');
+const forecastHeader = document.getElementById('forecast');
+
+
+
+
+
 
 document.getElementById('submitBtn').addEventListener('click', function(event) {
     event.preventDefault();
 
     const city = document.getElementById('cityNameInput').value;
     if (city) {
-
-        saveToLocal(city);
-        storingWeatherInfo(city);
-        
+        // addCityToHistory(city);
+        // saveToLocal(city);
+        current(city);
+        forecast(city);
     } else {
         (cityNameInput === "")
         alert('Please Enter City Name!');
     }
 })
 
-function storingWeatherInfo(city) {
-    let currentData = current(city);
-    const cityInfoId = document.getElementById('cityInfo');
-    
 
 
-    const historyList = document.getElementById('history');
-    const cityItem = document.createElement('li'); 
-    
-    cityItem.classList.add('list-group-item');
-    cityItem.textContent = city;
-    
-    const cityLink = document.createElement('a');
-    cityLink.href = '#';
-    cityLink.addEventListener('click', function (event) {
-        event.preventDefault();
-        current(city);
-        forecast(city);
-    });
-    cityItem.appendChild(cityLink);
-    historyList.appendChild(cityItem);
-}
+// function addCityToHistory(city) {
+//     const historyList = document.getElementById('history-list');
+//     const cityItem = document.createElement('li'); 
+//     const cityLink = document.createElement('a');
+//     cityItem.classList.add('list-group-item');
+//     cityLink.href = '#'
+//     cityItem.textContent = city;
+//     cityLink.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         current(city);
+//         forecast(city);
+//     });
+//     historyList.appendChild(cityItem);
+//     cityItem.appendChild(cityLink)
+// }
 
-function saveToLocal(city) {
-    const cities = JSON.parse(localStorage.getItem('cities')) || [];
-    if (!cities.includes(city)) {
-        cities.push(city);
-        localStorage.setItem('cities', JSON.stringify(cities));
-    }
-}
+// function saveToLocal(city) {
+//     const cities = JSON.parse(localStorage.getItem('cities')) || [];
+//     if (!cities.includes(city)) {
+//         cities.push(city);
+//         localStorage.setItem('cities', JSON.stringify(cities));
+//     }
+// }
 
-function loadCities() {
-    const cities = JSON.parse(localStorage.getItem('cities')) || [];
-    cities.forEach(function(city) {
-        storingWeatherInfo(city);
-    });
-}
+// function loadCities() {
+//     const cities = JSON.parse(localStorage.getItem('cities')) || [];
+//     cities.forEach(function(city) {
+//         addCityToHistory(city);
+//     });
+// }
 
 document.addEventListener('DOMContentLoaded', loadCities);
+
 
 //Calls api information for the current weather
 function current(city) {
@@ -151,7 +155,7 @@ function current(city) {
   })
   .then(function (data) {
 
-    currentData = {
+    let currentData = {
         name: data.name,
         temp: data.main.temp,
         humidity: data.main.humidity,
@@ -159,9 +163,9 @@ function current(city) {
         icon: data.weather[0].icon
     }
     // console.log(data);
-    console.log(currentData);
+    // console.log(currentData);
+    currentCard(currentData);
   }) 
-//   return currentData;
 }
 // calls api information for the forecast
 function forecast(city) {
@@ -186,7 +190,7 @@ function forecast(city) {
             console.log(forecastData);
         }
     })
-    // return forecastData; 
 }
+
 
 
