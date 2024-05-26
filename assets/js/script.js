@@ -92,10 +92,56 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 
     const city = document.getElementById('cityNameInput').value;
     if (city) {
-        current(city);
-        forecast(city);
+
+        saveToLocal(city);
+        storingWeatherInfo(city);
+        
+    } else {
+        (cityNameInput === "")
+        alert('Please Enter City Name!');
     }
 })
+
+function storingWeatherInfo(city) {
+    let currentData = current(city);
+    const cityInfoId = document.getElementById('cityInfo');
+    
+
+
+    const historyList = document.getElementById('history');
+    const cityItem = document.createElement('li'); 
+    
+    cityItem.classList.add('list-group-item');
+    cityItem.textContent = city;
+    
+    const cityLink = document.createElement('a');
+    cityLink.href = '#';
+    cityLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        current(city);
+        forecast(city);
+    });
+    cityItem.appendChild(cityLink);
+    historyList.appendChild(cityItem);
+}
+
+function saveToLocal(city) {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
+    if (!cities.includes(city)) {
+        cities.push(city);
+        localStorage.setItem('cities', JSON.stringify(cities));
+    }
+}
+
+function loadCities() {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
+    cities.forEach(function(city) {
+        storingWeatherInfo(city);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadCities);
+
 //Calls api information for the current weather
 function current(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`, {
@@ -115,6 +161,7 @@ function current(city) {
     // console.log(data);
     console.log(currentData);
   }) 
+//   return currentData;
 }
 // calls api information for the forecast
 function forecast(city) {
@@ -133,12 +180,13 @@ function forecast(city) {
                 temp: data.list[i].main.temp,
                 humidity: data.list[i].main.humidity,
                 wind: data.list[i].wind.speed,
-                icon: data.list[0].weather[0].icon
+                icon: data.list[i].weather[0].icon
             }
             // console.log(data);
             console.log(forecastData);
         }
     })
+    // return forecastData; 
 }
 
 
