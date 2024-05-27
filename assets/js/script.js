@@ -164,7 +164,7 @@ function current(city) {
         icon: data.weather[0].icon
     }
     // console.log(data);
-    console.log(currentData);
+    // console.log(currentData);
     currentCard(currentData);
   }) 
 }
@@ -188,7 +188,8 @@ function forecast(city) {
                 icon: data.list[i].weather[0].icon
             }
             // console.log(data);
-            console.log(forecastData);
+            // console.log(forecastData);
+            forecastCard(forecastData)
         }
     })
 }
@@ -203,10 +204,10 @@ function currentCard(currentData) {
     const iconEl = document.createElement('img');
 console.log('current data name', currentData.name);
     nameEl.innerText = currentData.name;
-    tempEl.innerText = currentData.temp;
-    windEl.textContent = currentData.wind;
-    humidityEl.textContent = currentData.humidity;
-    iconEl.textContent = currentData.icon;
+    tempEl.innerText = currentData.temp + ' ºF';
+    windEl.textContent = currentData.wind + ' MPH';
+    humidityEl.textContent = currentData.humidity + ' %';
+    iconEl.src = `https://openweathermap.org/img/w/${currentData.icon}.png`
 
     nameEl.append(tempEl);
     nameEl.append(windEl);
@@ -218,6 +219,36 @@ console.log('current data name', currentData.name);
     // console.log(currentCard);
 
 }
+
+function forecastCard(forecastData) {
+    console.log("inside forecastCard function", forecastData);
+    const forecastArea = document.getElementById('forecastArea')
+    const dateEl = document.createElement('h3');
+    const tempEl = document.createElement('li');
+    const windEl = document.createElement('li');
+    const humidityEl = document.createElement('li');
+    const iconEl = document.createElement('img');
+
+// need new append, need to take name out
+    dateEl.innerText = forecastData.date;
+    tempEl.innerText = forecastData.temp + ' ºF';
+    windEl.textContent = forecastData.wind + ' MPH';
+    humidityEl.textContent = forecastData.humidity + ' %';
+    iconEl.src = `https://openweathermap.org/img/w/${forecastData.icon}.png`
+
+    dateEl.append(tempEl);
+    dateEl.append(windEl);
+    dateEl.append(humidityEl);
+    dateEl.append(iconEl);
+    forecastArea.append(dateEl);
+
+    console.log(forecastCard);
+
+}
+
+
+//need "for loop" for search history, button needs event listener. 
+
 
 
 
