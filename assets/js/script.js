@@ -116,6 +116,7 @@ function addCityToHistory(city) {
     const historyList = document.getElementById('history-list');
     const cityItem = document.createElement('li'); 
     const cityLink = document.createElement('a');
+    // const historyBtn = document.createElement('button');
     cityItem.classList.add('list-group-item');
     cityLink.href = '#'
     cityItem.textContent = city;
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', loadCities);
 
 //Calls api information for the current weather
 function current(city) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}`, {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi}&units=imperial`, {
 }) 
   .then(function (response) {
       return response.json();
@@ -164,12 +165,12 @@ function current(city) {
     }
     // console.log(data);
     console.log(currentData);
-    // currentCard(currentData);
+    currentCard(currentData);
   }) 
 }
 // calls api information for the forecast
 function forecast(city) {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast/?q=${city}&appid=${weatherApi}`, {
+    fetch(`http://api.openweathermap.org/data/2.5/forecast/?q=${city}&appid=${weatherApi}&units=imperial`, {
         
 })
     .then(function (response) {
@@ -190,6 +191,32 @@ function forecast(city) {
             console.log(forecastData);
         }
     })
+}
+
+function currentCard(currentData) {
+    console.log("inside currentCard function", currentData);
+    const currentArea = document.getElementById('currentArea')
+    const nameEl = document.createElement('h3');
+    const tempEl = document.createElement('li');
+    const windEl = document.createElement('li');
+    const humidityEl = document.createElement('li');
+    const iconEl = document.createElement('img');
+console.log('current data name', currentData.name);
+    nameEl.innerText = currentData.name;
+    tempEl.innerText = currentData.temp;
+    windEl.textContent = currentData.wind;
+    humidityEl.textContent = currentData.humidity;
+    iconEl.textContent = currentData.icon;
+
+    nameEl.append(tempEl);
+    nameEl.append(windEl);
+    nameEl.append(humidityEl);
+    nameEl.append(iconEl);
+    currentArea.append(nameEl);
+
+    // addend h3, the append the li onto h3, then append the h3 onto something in html
+    // console.log(currentCard);
+
 }
 
 
