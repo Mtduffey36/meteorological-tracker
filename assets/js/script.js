@@ -100,8 +100,8 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 
     const city = document.getElementById('cityNameInput').value;
     if (city) {
-        // addCityToHistory(city);
-        // saveToLocal(city);
+        addCityToHistory(city);
+        saveToLocal(city);
         current(city);
         forecast(city);
     } else {
@@ -112,36 +112,36 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 
 
 
-// function addCityToHistory(city) {
-//     const historyList = document.getElementById('history-list');
-//     const cityItem = document.createElement('li'); 
-//     const cityLink = document.createElement('a');
-//     cityItem.classList.add('list-group-item');
-//     cityLink.href = '#'
-//     cityItem.textContent = city;
-//     cityLink.addEventListener('click', function (event) {
-//         event.preventDefault();
-//         current(city);
-//         forecast(city);
-//     });
-//     historyList.appendChild(cityItem);
-//     cityItem.appendChild(cityLink)
-// }
+function addCityToHistory(city) {
+    const historyList = document.getElementById('history-list');
+    const cityItem = document.createElement('li'); 
+    const cityLink = document.createElement('a');
+    cityItem.classList.add('list-group-item');
+    cityLink.href = '#'
+    cityItem.textContent = city;
+    cityLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        current(city);
+        forecast(city);
+    });
+    historyList.appendChild(cityItem);
+    cityItem.appendChild(cityLink)
+}
 
-// function saveToLocal(city) {
-//     const cities = JSON.parse(localStorage.getItem('cities')) || [];
-//     if (!cities.includes(city)) {
-//         cities.push(city);
-//         localStorage.setItem('cities', JSON.stringify(cities));
-//     }
-// }
+function saveToLocal(city) {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
+    if (!cities.includes(city)) {
+        cities.push(city);
+        localStorage.setItem('cities', JSON.stringify(cities));
+    }
+}
 
-// function loadCities() {
-//     const cities = JSON.parse(localStorage.getItem('cities')) || [];
-//     cities.forEach(function(city) {
-//         addCityToHistory(city);
-//     });
-// }
+function loadCities() {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
+    cities.forEach(function(city) {
+        addCityToHistory(city);
+    });
+}
 
 document.addEventListener('DOMContentLoaded', loadCities);
 
@@ -163,8 +163,8 @@ function current(city) {
         icon: data.weather[0].icon
     }
     // console.log(data);
-    // console.log(currentData);
-    currentCard(currentData);
+    console.log(currentData);
+    // currentCard(currentData);
   }) 
 }
 // calls api information for the forecast
